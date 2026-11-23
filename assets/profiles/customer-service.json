@@ -1,0 +1,88 @@
+{
+  "profile_id": "customer-service",
+  "display_name": "客服 Agent",
+  "decision_context": "客服 Agent 产品与技术演进——工作台智能化、多轮对话助手、工具调用与可靠交付。周报读者为产品、研发与算法同学，用于跟踪学术界与客服 Agent 相关的可迁移进展。",
+  "relevance_anchor": "判断一篇论文是否入选的唯一标准：其方法、结论或问题建模，能否迁移到“客服 Agent 的可靠性、自我改进、长程任务处理、多轮对话、工具调用、失败归因、评测”等实际问题上。技术领域不限，客服相关性靠迁移价值而非字面命中。",
+  "research_directions": [
+    {
+      "id": "agent-reliability",
+      "title": "Agent 可靠性与失败归因",
+      "description": "长程 / 多步 Agent 在真实任务中的失败定位、根因分析、责任归属、可靠性评测。对应客服 Agent 出错时“错在哪一步、由谁负责、如何度量”的问题。",
+      "keywords": [
+        "agent reliability",
+        "failure attribution",
+        "root cause analysis",
+        "long-horizon agent",
+        "agent evaluation benchmark",
+        "trajectory analysis"
+      ]
+    },
+    {
+      "id": "self-improvement",
+      "title": "Agent 自我改进与经验沉淀",
+      "description": "Agent 从失败或反馈中优化自身话术、流程、配置、记忆，而非依赖更换底座模型。对应客服 Agent 的话术库、SOP、经验复用如何自动迭代。",
+      "keywords": [
+        "self-improving agent",
+        "self-refine",
+        "experience learning",
+        "prompt optimization",
+        "memory-augmented agent",
+        "reflection"
+      ]
+    },
+    {
+      "id": "multi-turn-dialogue",
+      "title": "多轮对话与工具调用",
+      "description": "多轮对话状态维护、意图理解、工具 / API 调用编排、对话式任务闭环。对应客服在咨询、履约、售后场景中的多轮交互与后端能力调用。",
+      "keywords": [
+        "multi-turn dialogue",
+        "task-oriented dialogue",
+        "tool use",
+        "function calling",
+        "conversational agent",
+        "dialogue state tracking"
+      ]
+    },
+    {
+      "id": "long-context-memory",
+      "title": "长程任务与记忆管理",
+      "description": "长会话 / 长任务中的上下文压缩、记忆分层、状态维持。对应客服处理跨多轮、跨会话的复杂工单时如何不丢失关键信息。",
+      "keywords": [
+        "long-context",
+        "agent memory",
+        "context compression",
+        "memory management",
+        "stateful agent"
+      ]
+    },
+    {
+      "id": "service-scenario",
+      "title": "客服与服务场景直接应用",
+      "description": "直接面向客服、售后、导购、投诉、情感识别等服务场景的模型与系统研究。字面即客服相关，优先入选。",
+      "keywords": [
+        "customer service",
+        "customer support",
+        "complaint handling",
+        "intent recognition",
+        "emotion recognition",
+        "shopping assistant",
+        "e-commerce dialogue"
+      ]
+    }
+  ],
+  "arxiv_categories": [
+    "cs.CL",
+    "cs.AI",
+    "cs.LG",
+    "cs.HC",
+    "cs.MA"
+  ],
+  "relevance_threshold": 3,
+  "max_papers": 10,
+  "out_of_scope": [
+    "纯理论 / 纯数学证明、与 Agent 或对话无迁移路径的工作",
+    "纯 CV / 图像生成 / 语音信号处理等与客服文本交互无关的方向",
+    "硬件、芯片、编译器、分布式系统等底层工程，除非直接服务于 Agent 推理",
+    "仅换底座模型即可、无方法论增量的刷榜工作"
+  ]
+}
