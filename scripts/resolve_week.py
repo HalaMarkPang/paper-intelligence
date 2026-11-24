@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
-"""解析论文周报的覆盖窗口。
+"""解析论文周报的覆盖窗口（滚动 7 天）。
 
-口径：每周三 11:00 运行，覆盖「上周三 00:00:00 ~ 本周二 23:59:59」，
-即运行日往前推的完整 7 天（运行当天周三不计入，因为当天尚未过完）。
+口径：以 Asia/Shanghai 的「昨天」为窗口结束日（最近一个已过完的自然日），
+往前共 7 天，即 [昨天-6, 昨天]。运行当天不计入，避免半日窗口。
 
-无论实际哪天运行，都以「最近一个已过完的周二」为窗口结束日，
-从而保证窗口始终是完整的上周三到本周二 7 天。
+示例：若今天是 2026-09-17，则窗口为 2026-09-10 ~ 2026-09-16。
 """
 
 from __future__ import annotations
@@ -15,21 +14,10 @@ import json
 from datetime import date, datetime, timedelta
 from zoneinfo import ZoneInfo
 
-# Python weekday(): Monday=0 ... Wednesday=2 ... Sunday=6
-WEDNESDAY = 2
-TUESDAY = 1
-
 
 def resolve(today: date) -> dict:
-    """给定运行日，返回覆盖窗口 [上周三, 本周二]。
-
-    窗口结束 = 最近一个已过完的周二（含今天若今天就是周二之后）。
-    以周三为运行日时：本周二是昨天，窗口 = 上周三 ~ 本周二，共 7 天。
-    """
-    # 找到最近的、不晚于今天的周二作为窗口结束日。
-    # (today.weekday() - TUESDAY) % 7 = 距离上一个周二的天数。
-    days_since_tuesday = (today.weekday() - TUESDAY) % 7
-    period_end = today - timedelta(days=days_since_tuesday)
+    """给定运行日，返回滚动 7 天窗口 [昨天-6, 昨天]。"""
+    period_end = today - timedelta(days=1)
     period_start = period_end - timedelta(days=6)
     iso_year, iso_week, _ = period_start.isocalendar()
     return {
@@ -39,12 +27,13 @@ def resolve(today: date) -> dict:
         "end_datetime": f"{period_end.isoformat()}T23:59:59",
         "week_label": f"{iso_year}-W{iso_week:02d}",
         "days": 7,
+        "mode": "rolling_7d",
         "timezone": "Asia/Shanghai",
     }
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="解析论文周报覆盖窗口（上周三~本周二）")
+    parser = argparse.ArgumentParser(description="解析论文周报覆盖窗口（滚动近 7 天）")
     parser.add_argument("--today", help="覆盖当前 Asia/Shanghai 日期用于测试 (YYYY-MM-DD)")
     args = parser.parse_args()
     today = (date.fromisoformat(args.today) if args.today
