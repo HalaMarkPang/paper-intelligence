@@ -1,4 +1,4 @@
-# Paper Intelligence · 论文周报 Skill
+# Paper Intelligence
 
 本仓库是一份可被 Agent 加载的 Skill：在给定业务方向下，抓取 arXiv 与 HuggingFace 在覆盖窗口内的相关论文，逐篇完成四段式解读，并渲染为本地 HTML 周报。默认检索对象为**客服 Agent**。
 
